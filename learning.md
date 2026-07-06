@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 学习资料
-permalink: /learning/
+permalink: /_learning/
 ---
 
 # 学习资料
