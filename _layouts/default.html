@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -16,6 +15,11 @@
         {% endif %}
     </title>
 
+    <meta
+        name="description"
+        content="{{ page.description | default: site.description }}"
+    >
+
     <link
         rel="stylesheet"
         href="{{ '/assets/css/style.css' | relative_url }}"
@@ -23,17 +27,49 @@
 </head>
 
 <body>
-    {% include navigation.html %}
+    {%- assign cover_bg_color = page.cover_bg_color | default: site.cover_bg_color | default: '#28494d' -%}
+    {%- assign cover_color = page.cover_color | default: site.cover_color | default: '#ffffff' -%}
+    {%- assign cover_image = page.cover_image | default: site.cover_image -%}
 
-    <main class="container">
-        {{ content }}
-    </main>
+    <div class="site-shell">
+        <aside
+            class="sidebar"
+            style="background-color: {{ cover_bg_color }}; color: {{ cover_color }}; {% if cover_image %}background-image: linear-gradient(rgba(17, 31, 36, .58), rgba(17, 31, 36, .72)), url('{{ cover_image | relative_url }}');{% endif %}"
+        >
+            <div class="masthead">
+                <a
+                    class="masthead-title"
+                    href="{{ '/' | relative_url }}"
+                >
+                    {{ site.title }}
+                </a>
 
-    <footer>
-        <p>
-            © {{ site.time | date: "%Y" }}
-            {{ site.title }}
-        </p>
-    </footer>
+                <p class="masthead-tagline">
+                    {{ site.description }}
+                </p>
+
+                {% include navigation.html %}
+            </div>
+        </aside>
+
+        <div class="content-column">
+            <main class="content">
+                {{ content }}
+            </main>
+
+            <footer class="footer">
+                <small>
+                    © {{ site.time | date: "%Y" }}
+                    {% if site.author %}
+                        <a href="{{ site.author.url }}">{{ site.author.name }}</a>
+                    {% else %}
+                        {{ site.title }}
+                    {% endif %}
+                    · Powered by Jekyll &amp;
+                    <a href="https://github.com/vszhub/not-pure-poole">Not Pure Poole</a>
+                </small>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>

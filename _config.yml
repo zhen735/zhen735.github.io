@@ -4,6 +4,13 @@ lang: zh-CN
 
 url: "https://zhen735.github.io"
 baseurl: ""
+cover_image: /assets/images/cover.jpeg
+cover_bg_color: "#28494d"
+cover_color: "#ffffff"
+
+author:
+  name: zhen735
+  url: https://github.com/zhen735
 
 markdown: kramdown
 

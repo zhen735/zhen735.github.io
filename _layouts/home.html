@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+<section class="home-intro">
+    {{ content }}
+</section>
+
+{% assign sorted_learning = site.learning | sort: "date" | reverse %}
+
+<section class="posts" aria-labelledby="recent-learning-title">
+    <div class="section-heading">
+        <p>Recent Notes</p>
+        <h2 id="recent-learning-title">最近学习</h2>
+    </div>
+
+    {% assign shown_notes = 0 %}
+    {% for note in sorted_learning %}
+        {% if note.title %}
+            {% assign shown_notes = shown_notes | plus: 1 %}
+            <article class="post-entry">
+                <h3 class="post-title">
+                    <a href="{{ note.url | relative_url }}">{{ note.title }}</a>
+                </h3>
+
+                <div class="post-meta">
+                    {% if note.date %}
+                        <time datetime="{{ note.date | date_to_xmlschema }}">
+                            {{ note.date | date: "%Y-%m-%d" }}
+                        </time>
+                    {% endif %}
+
+                    {% if note.category %}
+                        <span>{{ note.category }}</span>
+                    {% endif %}
+                </div>
+
+                {% if note.description %}
+                    <p>{{ note.description }}</p>
+                {% else %}
+                    <p>{{ note.excerpt | strip_html | truncate: 120 }}</p>
+                {% endif %}
+
+                {% if note.tags %}
+                    <div class="tag-list">
+                        {% for tag in note.tags %}
+                            <span>{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </article>
+        {% endif %}
+
+        {% if shown_notes == 5 %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+
+    {% if shown_notes == 0 %}
+        <p class="empty-state">还没有可展示的学习笔记。</p>
+    {% endif %}
+</section>
