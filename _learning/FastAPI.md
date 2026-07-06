@@ -1,4 +1,15 @@
-# FastAPI`
+---
+title: FastAPI
+date: 2026-07-06
+category: 后端服务
+description: FastAPI 本地模型 HTTP 服务模板记录。
+tags:
+  - FastAPI
+  - HTTP
+  - 模型部署
+---
+
+# FastAPI
 
 这个文档主要是为了方便下一次开启一个新的hettp服务调用本地模型，算是一个模板吧
 
